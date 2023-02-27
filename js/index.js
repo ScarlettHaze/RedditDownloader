@@ -1,4 +1,4 @@
-const CORS_PROXY_URL = "https://api.allorigins.win/raw?url=";
+const CORS_PROXY_URL = "https://api.allorigins.win/get?url=";
 const CHECK_DOWNLOADS_FINISHED_EVERY_MS = 100;
 const MAX_POSTS_PER_REQUEST = 100;
 const MIN_POSTS_PER_REQUEST = 5;
