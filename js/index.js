@@ -257,16 +257,16 @@ function download(anchor) {
     let url;
 
     if (userDownload) {
-        url = "https://www.reddit.com/user/" + targetName
+        url = "www.reddit.com/user/" + targetName
             + ".json?limit=" + maxPostCountNow
             + (anchor !== undefined ? "&after=" + anchor : "");
     } else if (searchFilter) {
-        url = "https://www.reddit.com/r/" + targetName
+        url = "www.reddit.com/r/" + targetName
             + "/search.json?q=" + searchFilter + "&restrict_sr=on&limit=" + maxPostCountNow
             + (includeNsfw ? "&include_over_18=on" : "")
             + (anchor !== undefined ? "&after=" + anchor : "");
     } else {
-        url = "https://www.reddit.com/r/" + targetName
+        url = "www.reddit.com/r/" + targetName
             + "/" + section + ".json?limit=" + maxPostCountNow
             + (anchor !== undefined ? "&after=" + anchor : "");
     }
@@ -424,23 +424,23 @@ function transformUrl(url) {
 
 function isImgurUrl(url) {
     url = url.toLowerCase();
-    return url.startsWith("http://imgur.com/") || url.startsWith("https://imgur.com/");
+    return url.startsWith("http://imgur.com/") || url.startsWith("imgur.com/");
 }
 
 function isImgurImageUrl(url) {
     url = url.toLowerCase();
-    return url.startsWith("http://i.imgur.com/") || url.startsWith("https://i.imgur.com/");
+    return url.startsWith("http://i.imgur.com/") || url.startsWith("i.imgur.com/");
 }
 
 function isImgurAlbumOrGalleryUrl(url) {
     url = url.toLowerCase();
-    return url.startsWith("http://imgur.com/a/") || url.startsWith("https://imgur.com/a/") 
-        || url.startsWith("http://imgur.com/gallery/") || url.startsWith("https://imgur.com/gallery/");
+    return url.startsWith("http://imgur.com/a/") || url.startsWith("imgur.com/a/") 
+        || url.startsWith("http://imgur.com/gallery/") || url.startsWith("imgur.com/gallery/");
 }
 
 function isImgurSingleImageAlbumUrl(url) {
     url = url.toLowerCase();
-    return (url.startsWith("http://imgur.com/") || url.startsWith("https://imgur.com/"))
+    return (url.startsWith("http://imgur.com/") || url.startsWith("imgur.com/"))
         && !isImgurAlbumOrGalleryUrl(url);
 }
 
@@ -451,7 +451,7 @@ function isGfycatUrl(url) {
 
 function isRedditVideoUrl(url) {
     url = url.toLowerCase();
-    return url.startsWith("http://v.redd.it/") || url.startsWith("https://v.redd.it/");
+    return url.startsWith("v.redd.it/") || url.startsWith("v.redd.it/");
 }
 
 function downloadDirectFile(url, post, postIdx) {
@@ -479,7 +479,7 @@ function downloadImgurAlbum(url, post, postIdx) {
     const imageName = getPartAfterSlash(url);
 
     $.ajax({
-        url: "https://api.imgur.com/3/album/" + imageName,
+        url: "api.imgur.com/3/album/" + imageName,
         type: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -583,7 +583,7 @@ function downloadGfycat(url, post, postIdx) {
     const gfycatName = getPartAfterSlash(url);
 
     $.ajax({
-        url: "https://api.gfycat.com/v1/gfycats/" + gfycatName,
+        url: "api.gfycat.com/v1/gfycats/" + gfycatName,
         type: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -760,7 +760,7 @@ function addFileToZip(fileName, extension, data, post, dataIsBinary) {
     zip.file(fileName + extension, data, { 
         binary: dataIsBinary,
         date: new Date(post.createdUtc * 1000),
-        comment: "https://reddit.com" + post.permalink
+        comment: "reddit.com" + post.permalink
     });
 
     downloadedBytes += dataIsBinary ? data.size : data.length;
